@@ -4,7 +4,7 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
 
 export enum AlertTypes{
   DANGER = 'danger',
-  SUCCESS = 'succss'
+  SUCCESS = 'success'
 }
 
 @Injectable({

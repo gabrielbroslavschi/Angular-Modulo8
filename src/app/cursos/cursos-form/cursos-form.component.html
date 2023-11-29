@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+    <div class="form-row">
+      <div class="col-sm-12">
+        <label for="nome">Nome do Curso</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nome"
+          placeholder="Nome do Curso"
+          formControlName="nome"
+          [ngClass]="{'is-invalid': subimitted && hasError('nome')}"
+        />
+        <div class="invalid-feedback" *ngIf="hasError('nome')" >Por favor informe um nome valido para o curso</div>
+        <div class="invalid-feedback" *ngIf="hasMinLength()" >Nome precisa ter no minímo 3 caracteres</div>
+        <div class="invalid-feedback" *ngIf="hasMaxLength()" >Nome precisa ter no máximo 250 caracteres</div>
+      </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <button class="btn btn-primary" type="submit" (click)="onSubmit()">Salvar</button>
+
+        <button class="btn btn-danger" type="button" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+  
