@@ -13,6 +13,7 @@ export class CursosService {
   constructor(private http: HttpClient) { }
 
   list(){
-    return this.http.get<Curso[]>(this.API).pipe(delay(2000))
+    // return this.http.get<Curso[]>(this.API).pipe(delay(2000))  //Exemplo com delay de 2segundos
+    return this.http.get<Curso[]>(this.API)
   }
 }
