@@ -24,18 +24,20 @@ export class CursosFormComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: any) => {
-      const id = params.id;
-      const curso$ = this.service.loadById(id);
-      curso$.subscribe((curso: any) =>{
-        this.updateForm(curso)
-      })
-    });
+    // this.route.params.subscribe((params: any) => {
+    //   const id = params.id;
+    //   const curso$ = this.service.loadById(id);
+    //   curso$.subscribe((curso: any) =>{
+    //     this.updateForm(curso)
+    //   })
+    // });
+
+    const curso = this.route.snapshot.data['curso'];
 
     this.form = this.fb.group({
-      id: [null],
+      id: [curso.id],
       nome: [
-        null,
+        curso.nome,
         [
           Validators.required,
           Validators.minLength(3),
@@ -90,10 +92,10 @@ export class CursosFormComponent {
     this.form.reset();
   }
 
-  updateForm(curso: Curso){
-    this.form.patchValue({
-      id: curso.id,
-      nome: curso.nome
-    })
-  }
+  // updateForm(curso: Curso){
+  //   this.form.patchValue({
+  //     id: curso.id,
+  //     nome: curso.nome
+  //   })
+  // }
 }
