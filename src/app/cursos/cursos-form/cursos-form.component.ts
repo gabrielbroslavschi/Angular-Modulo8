@@ -71,19 +71,25 @@ export class CursosFormComponent {
 
   onSubmit() {
     this.subimitted = true;
-    console.log(this.form.value);
+
     if (this.form.valid) {
-      this.cursosService.create(this.form.value).subscribe(
-        (success: any) => {
-          this.modal.showAlertSucess('Curso Criado Com Sucesso!');
-        },
-        (error: any) => {
-          this.modal.showAlertDanger('Erro ao Criar Curso!');
-        },
-        () => {
-          console.log('request completo');
-        }
-      );
+      
+      let mensagemSuccess = "Curso Criado Com Sucesso!";
+      let mensagemErro = "Erro ao criar curso, tente novamente!";
+      if(this.form.value.id){
+        mensagemSuccess = "Curso Atualizado Com Sucesso!"
+        mensagemErro = "Erro ao Atualizar Curso!"
+      }
+        
+        this.cursosService.save(this.form.value).subscribe(
+          (success: any) => {
+            this.modal.showAlertSucess(mensagemSuccess);
+          },
+          (error: any) => {
+            this.modal.showAlertDanger(mensagemErro);
+          }
+        )
+      
     }
   }
 
