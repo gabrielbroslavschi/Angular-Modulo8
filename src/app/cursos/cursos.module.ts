@@ -5,12 +5,14 @@ import { CommonModule } from '@angular/common';
 import { CursosRoutingModule } from './cursos-routing.module';
 import { CursosListaComponent } from './cursos-lista/cursos-lista.component';
 import { CursosFormComponent } from './cursos-form/cursos-form.component';
+import { UploadFileComponent } from './upload-file/upload-file/upload-file.component';
 
 
 @NgModule({
   declarations: [
     CursosListaComponent,
-    CursosFormComponent
+    CursosFormComponent,
+    UploadFileComponent
   ],
   imports: [
     CommonModule,
