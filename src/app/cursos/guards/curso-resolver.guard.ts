@@ -10,12 +10,13 @@ import {
 import { Observable, of } from 'rxjs';
 import { Curso } from '../curso';
 import { CursosService } from '../cursos.service';
+import { Cursos2Service } from '../cursos2.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CursoResolveGuard implements Resolve<Curso> {
-  constructor(private service: CursosService) {}
+  constructor(private service: Cursos2Service) {}
 
   resolve(
     route: ActivatedRouteSnapshot,

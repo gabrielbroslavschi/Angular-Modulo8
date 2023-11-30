@@ -4,6 +4,7 @@ import { CursosService } from '../cursos.service';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ActivatedRoute } from '@angular/router';
 import { Curso } from '../curso';
+import { Cursos2Service } from '../cursos2.service';
 
 @Component({
   selector: 'app-cursos-form',
@@ -17,10 +18,10 @@ export class CursosFormComponent {
 
   constructor(
     private fb: FormBuilder,
-    private cursosService: CursosService,
+    private cursosService: Cursos2Service,
     private modal: AlertModalService,
     private route: ActivatedRoute,
-    private service: CursosService
+    private service: Cursos2Service
   ) {}
 
   ngOnInit(): void {
