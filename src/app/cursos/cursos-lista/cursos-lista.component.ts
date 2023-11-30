@@ -1,5 +1,5 @@
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Observable, Subject, catchError, empty } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, empty, switchMap, take } from 'rxjs';
 import { Component, ViewChild } from '@angular/core';
 import { CursosService } from '../cursos.service';
 import { Curso } from '../curso';
@@ -66,11 +66,28 @@ export class CursosListaComponent {
 
   onDelete(curso: Curso) {
     this.cursoSelecionado = curso;
-    this.deleteModalRef = this.modalService.show(this.deleteModal);
+    // this.deleteModalRef = this.modalService.show(this.deleteModal, { class: 'modal-sm' });
+
+    const result$ = this.alertServices.showConfirm('Confirmação', 'Tem certeza que deseja remover esse curso?');
+    result$.asObservable()
+    .pipe(
+      take(1),
+      switchMap(result => result ? this.service.delete(curso.id) : EMPTY)
+    )
+    .subscribe(
+      (success: any) => {
+        this.onRefresh();
+        console.log("entrou")
+        this.handleSuccess("Registro Excluio Com Sucesso!")
+      },
+      (error: any) => {
+        this.alertServices.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.');
+      }
+    );
   }
 
-  onConfirmDelete() {
-    this.service.delete(this.cursoSelecionado.id).subscribe(
+  onConfirmDelete(id: number) {
+    this.service.delete(id).subscribe(
       (success: any) => {
         this.onRefresh();
         this.deleteModalRef.hide();
