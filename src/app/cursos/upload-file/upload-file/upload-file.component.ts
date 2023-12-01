@@ -14,14 +14,13 @@ export class UploadFileComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    
   }
 
   onChange(event: any) {
     const selectedFiles = <FileList>event?.srcElement?.files;
 
     const fileNames = [];
-    this.files = new Set()
+    this.files = new Set();
 
     for (let i = 0; i < selectedFiles.length; i++) {
       fileNames.push(selectedFiles[i].name);
@@ -33,8 +32,10 @@ export class UploadFileComponent {
   }
 
   onUplad() {
-    if(this.files && this.files.size > 0){
-      this.service.upload(this.files, "http://localhost:8000/upload").subscribe(res => console.log("Upload Concluído"));
+    if (this.files && this.files.size > 0) {
+      this.service
+        .upload(this.files, '/api/upload')
+        .subscribe((res) => console.log('Upload Concluído'));
     }
   }
 }
