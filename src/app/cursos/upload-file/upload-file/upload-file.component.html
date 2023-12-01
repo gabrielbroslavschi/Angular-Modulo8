@@ -7,9 +7,14 @@
       id="customFile"
       (input)="onChange($event)"
       style="display: none"
+      multiple
     />
     <label class="form-control" for="customFile" id="customFileLabel"
       >Selecionar Arquivo</label
     >
   </div>
+</div>
+
+<div style="margin-top: 10px;">
+  <button type="button" class="btn btn-primary" (click)="onUplad()" [disabled]="!files">Enviar</button>
 </div>
