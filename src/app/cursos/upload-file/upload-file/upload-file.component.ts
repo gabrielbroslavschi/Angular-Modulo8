@@ -6,6 +6,7 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.css'],
+  preserveWhitespaces: true,
 })
 export class UploadFileComponent {
   files!: Set<File>;
@@ -42,19 +43,33 @@ export class UploadFileComponent {
           // HttpEventType
           // console.log(res);
 
-          console.log(event);
+          // console.log(event);
 
           if (event.type == HttpEventType.Response) {
-            console.log('Upload Concluído');
+            // console.log('Upload Concluído');
           } else if (
             event.type == HttpEventType.UploadProgress &&
             event.total
           ) {
             const percentDone = Math.round((event.loaded * 100) / event.total);
-            ~console.log('Progress => ', percentDone);
+            // console.log('Progress => ', percentDone);
             this.progress = percentDone;
           }
         });
     }
   }
+
+  downloadPDF() {
+    this.service.download('/api/downloadPDF').subscribe((res: any) => {
+      this.service.downloadFile(res, "teste.pdf");
+    });
+  }
+
+  downloadExcel() {
+    this.service.download('/api/downloadExcel').subscribe((res: any) => {
+      this.service.downloadFile(res, "teste.xlsx");
+    });
+  }
+
+  
 }

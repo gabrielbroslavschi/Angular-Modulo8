@@ -18,8 +18,16 @@ const  multipartMiddleware = multipart({uploadDir: "./uploads"})
 
 app.post("/upload", multipartMiddleware, (req, res) =>{
     const files = req.files;
-    console.log(files);
+    // console.log(files);
     res.json({message: files});
+})
+
+app.get("/downloadExcel", (req, res) => {
+    res.download("./uploads/INGLES.xlsx")
+})
+
+app.get("/downloadPDF", (req, res) => {
+    res.download("./uploads/CV - Gabriel_Broslavschi_Da_Costa.pdf")
 })
 
 app.use((err, req, res, next) => {

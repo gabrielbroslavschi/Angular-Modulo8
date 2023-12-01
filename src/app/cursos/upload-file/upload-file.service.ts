@@ -24,4 +24,29 @@ export class UploadFileService {
       reportProgress: true
     });
   }
+
+  download(url: string){
+    return this.http.get(url, {
+      responseType: 'blob' as 'json',
+      // reportProgress: 
+    })
+  }
+
+  downloadFile(arq: any, nomeArq: string) {
+    const file = new Blob([arq], {
+      type: arq.type,
+    });
+
+    const blob = window.URL.createObjectURL(file);
+
+    const link = document.createElement('a');
+    link.href = blob;
+    link.download = nomeArq;
+    link.click();
+
+    setTimeout(() => {
+      window.URL.revokeObjectURL(blob);
+      link.remove();
+    }, 100);
+  }
 }
